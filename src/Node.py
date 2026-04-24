@@ -14,6 +14,7 @@ class Node:
         if (self.parentNode is not None) and self in self.parentNode.childNodes:
             self.parentNode.childNodes.remove(self)
 
+
         self.parentNode = node
         if self.parentNode is not None:
             self.parentNode.childNodes.append(self)
