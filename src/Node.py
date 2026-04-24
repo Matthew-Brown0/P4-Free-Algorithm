@@ -9,7 +9,7 @@ class Node:
         self.md = 0
         self.mdValues = LinkedList()
 
-    def changeParent(self, node: InternalNode):
+    def changeParent(self, node: 'InternalNode'):
 
         if (self.parentNode is not None) and self in self.parentNode.childNodes:
             self.parentNode.childNodes.remove(self)
@@ -59,9 +59,11 @@ class VertexNode(Node):
     def __init__(self, value):
         Node.__init__(self)
         self.vertex = value
+        self.color = None
+
 
     def toString(self):
         if self.marked:
-            return f"Vertex(M)[{self.vertex}]"
+            return f"Vertex(M){{{self.color or "N/A"}}}[{self.vertex}]"
         else:
-            return f"Vertex[{self.vertex}]"
+            return f"Vertex{{{self.color or "N/A"}}}[{self.vertex}]"

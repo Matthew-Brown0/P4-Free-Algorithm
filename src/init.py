@@ -158,6 +158,26 @@ def getFirstLeaf(arr: list[Node]):
             return node
     return None
 
+
+
+def colorCotree(R: InternalNode, currentColor: int | None = None):
+    if currentColor is None:
+        currentColor = 1
+
+    for i in range(len(R.childNodes)):
+        node = R.childNodes[i]
+        if isinstance(node, InternalNode):
+            currentColor = colorCotree(node, currentColor)
+        elif isinstance(node, VertexNode):
+            node.color = currentColor
+
+        if R.label == 1 and i != len(R.childNodes)-1:
+            currentColor += 1
+            
+    return currentColor
+
+
+
 def isCograph(G: Graph) -> bool:
     R = InternalNode(1)
     v1 = VertexNode(G.verticies[0])
@@ -231,6 +251,8 @@ def isCograph(G: Graph) -> bool:
                 x.changeParent(newNode)
             if u is R:
                 R = y
+    colorCotree(R)
+    print(R.toString())
     return True
             
 
